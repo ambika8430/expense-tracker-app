@@ -51,3 +51,24 @@ exports.updateOrder = async ({ orderId, status }) => {
         return { success: false, error: err.message };
     }
 };
+
+// Function to get an order by orderId or customerId
+exports.isPremium = async () => {
+    try {
+
+        customerId = req.user.id
+        if (!customerId) throw new Error("Order ID or Customer ID is required");
+
+        const order = await Order.findOne({ where: customerId });
+
+        if (!order) {
+            return { success: false, error: "Order not found" };
+        }
+
+        return { success: true, data:true };
+    } catch (err) {
+        console.error("Error fetching order:", err.message);
+        return { success: false, error: err.message };
+    }
+};
+

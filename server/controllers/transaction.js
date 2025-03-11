@@ -46,7 +46,7 @@ exports.createTransaction = async (req, res, next) => {
                 "customer_phone": `${customerPhone}`
             },
             "order_meta": {
-                "return_url": `http://localhost:3001/payment-status/${orderId}`,
+                "return_url": `http://localhost:3001/home.html`,
                 "payment_methods": "cc,dc,upi"
             },
             "order_expiry_time": new Date(Date.now() + 60 * 60 * 1000).toISOString()

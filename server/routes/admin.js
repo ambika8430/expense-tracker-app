@@ -3,6 +3,7 @@ const router = express.Router();
 const expenseController = require('../controllers/expense');
 const userController = require('../controllers/user');
 const transactionController = require('../controllers/transaction');
+const orderController = require('../controllers/orders')
 const auth = require("../middleware/auth");
 
 router.post("/expense", auth, expenseController.addExpense);
@@ -18,5 +19,7 @@ router.delete('/user/:id', userController.deleteUser);
 
 router.post("/pay", auth, transactionController.createTransaction);
 router.get("/payment-status/:id", transactionController.getPaymentStatus);
+
+router.get('/premium', auth, orderController.getOrder);
 
 module.exports = router;

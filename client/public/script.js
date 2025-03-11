@@ -215,3 +215,69 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
+document.addEventListener("DOMContentLoaded", async function () {
+    const renderBtn = document.getElementById("renderBtn");
+
+    try {
+        // Fetch user's payment status from the backend
+        const response = await fetch("http://localhost:3000/premium", {
+            method: "GET",
+            headers: { "Content-Type": "application/json" }
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            localStorage.setItem("isPremium", "true");
+            renderBtn.textContent = "You are a premium member";
+            renderBtn.disabled = true;
+            renderBtn.classList.remove("btn-success");
+            renderBtn.classList.add("btn-secondary");
+        }
+    } catch (error) {
+        console.error("Error fetching payment status:", error);
+    }
+
+    renderBtn.addEventListener("click", async function () {
+        alert("You already have a premium membership.");
+    });
+});
+
+const Expense = require("../models/expense");
+
+// Get all expenses sorted in descending orde
+
+document.addEventListener("DOMContentLoaded", async function () {
+    const expensesList = document.getElementById("leaderBorad");
+
+    async function fetchExpenses() {
+        try {
+            const response = await fetch("http://localhost:3000/getExpense"); // Update with your backend URL
+            const expenses = await response.json();
+            renderExpenses(expenses);
+        } catch (error) {
+            console.error("Error fetching expenses:", error);
+        }
+    }
+
+    function renderExpenses(expenses) {
+        expensesList.innerHTML = ""; // Clear existing entries
+        expenses.forEach(expense => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${expense.expenseName}</td>
+                <td>${expense.category}</td>
+                <td>₹${expense.amount}</td>
+                <td>
+                    <button class="btn btn-danger btn-sm" onclick="deleteExpense(${expense.id})">Delete</button>
+                </td>
+            `;
+            expensesList.appendChild(row);
+        });
+    }
+
+    fetchExpenses();
+});
+
+
