@@ -6,10 +6,12 @@ dotenv.config();
 const app = express();
 const PORT = 3001;
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public/pages')));
+
+app.use('/scripts', express.static(path.join(__dirname, 'public/scripts')));
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'sign-in.html'));
+    res.sendFile(path.join(__dirname, 'public/pages', 'sign-in.html'));
 });
 
 app.listen(PORT, () => {

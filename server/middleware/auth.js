@@ -31,7 +31,7 @@ module.exports = async (req, res, next) => {
         }
 
         req.user = user; // Attach user object to request
-        console.log(req.user)
+       
         next(); // Pass control to the next middleware
     } catch (err) {
         console.error("JWT Verification Error:", err);

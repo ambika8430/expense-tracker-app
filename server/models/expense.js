@@ -19,6 +19,17 @@ const Expense = sequelize.define("Expense", {
   amount: {
     type: Sequelize.FLOAT,
     allowNull: false,
+    defaultValue: 0
+  },
+  income: {
+    type: Sequelize.FLOAT,
+    allowNull: false,
+    defaultValue: 0
+  },
+  date: {
+    type: Sequelize.DATEONLY,
+    allowNull: false,
+    defaultValue: Sequelize.NOW,
   },
   userId: { 
     type: Sequelize.INTEGER,

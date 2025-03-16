@@ -55,8 +55,6 @@ exports.createTransaction = async (req, res, next) => {
         // ✅ Correct Cashfree initialization
         const response = await Cashfree.PGCreateOrder("2023-08-01", request)
 
-        console.log("Cashfree Order Response:", response.data);
-
         await updateOrder({ orderId, status: "success" });
 
         const data = {
